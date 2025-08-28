@@ -30,6 +30,11 @@ Eager to support the project? Your help is always welcome to keep the project al
 
 #### Prerequisities:
 
+> [!NOTE]
+> Minimal kernel version is 6.5.0
+> 
+> Check version with `uname -r`
+
 1. Install the following packages using the terminal:
    - For Debian: `sudo apt install build-essential linux-headers-amd64`
    - For Ubuntu: `sudo apt install build-essential linux-headers-generic`
@@ -54,7 +59,7 @@ Eager to support the project? Your help is always welcome to keep the project al
 
 ### From AUR (Arch Linux)
 1. Install any AUR helper ([yay](https://github.com/Jguer/yay) for example)
-2. Run `yay -S msi-ec-git`
+2. Run `yay -S msi-ec-dkms-git`
 
 ### On NixOS
 Add these lines to your configuration
