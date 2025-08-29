@@ -4187,7 +4187,7 @@ static const char *ALLOWED_FW_59[] __initconst = {
 };
 
 static struct msi_ec_conf CONF59 __initdata = {
-	.allowed_fw = ALLOWED_FW_59, // Based on CONF38 and user verification
+	.allowed_fw = ALLOWED_FW_59, // WMI1 based, verified by user
 	.charge_control_address = 0xef,
 	.webcam = {
 		.address       = 0x2e,
@@ -4206,6 +4206,11 @@ static struct msi_ec_conf CONF59 __initdata = {
 	.shift_mode = {
 		.address = 0xf2,
 		.modes = {
+			// User-reported values:
+			// Extreme Performance: 0xc4
+			// High: 0xc0
+			// Medium: 0xc1
+			// Low: 0xc2 (Super Battery)
 			{ SM_ECO_NAME,     0xc2 },
 			{ SM_COMFORT_NAME, 0xc1 },
 			{ SM_SPORT_NAME,   0xc0 },
@@ -4214,12 +4219,11 @@ static struct msi_ec_conf CONF59 __initdata = {
 		},
 	},
 	.super_battery = {
-		.address = MSI_EC_ADDR_UNKNOWN,
+		.address = MSI_EC_ADDR_UNSUPP, // Integrated into ECO shift mode
 	},
 	.fan_mode = {
 		.address = 0xf4,
 		.modes = {
-			// Values based on the similar CONF38.
 			{ FM_AUTO_NAME,     0x00 },
 			{ FM_ADVANCED_NAME, 0x80 },
 			MSI_EC_MODE_NULL
@@ -4234,19 +4238,20 @@ static struct msi_ec_conf CONF59 __initdata = {
 		.rt_fan_speed_address = 0x89,
 	},
 	.leds = {
-		.micmute_led_address = MSI_EC_ADDR_UNKNOWN,
-		.mute_led_address    = MSI_EC_ADDR_UNKNOWN,
+		.micmute_led_address = MSI_EC_ADDR_UNSUPP, // No specific LED
+		.mute_led_address    = MSI_EC_ADDR_UNSUPP, // No specific LED
 		.bit                 = 1,
 	},
 	.kbd_bl = {
-		.bl_mode_address  = 0x2c,
-		.bl_modes         = { 0x00, 0x08 },
-		.max_mode         = 1,
+		.bl_mode_address  = MSI_EC_ADDR_UNSUPP, // No auto-off mode
+		.bl_modes         = {},
+		.max_mode         = 0,
 		.bl_state_address = 0xf3,
 		.state_base_value = 0x80,
 		.max_state        = 3,
 	},
 };
+
 static struct msi_ec_conf *CONFIGURATIONS[] __initdata = {
 	&CONF0,
 	&CONF1,
